@@ -1,5 +1,10 @@
 <div class="container my-5">
-    <h1 class="mb-3">Income</h1>
+    <div class="header">
+        <h1 class="mb-3">Income</h1>
+        <div class="d-flex justify-content-end mb-3">
+            <button class="btn btn-primary" (click)="addIncome()">Add Income</button>
+        </div>
+    </div>
     <table class="table" *ngIf="incomes && incomes.length > 0">
         <thead>
             <tr>
@@ -17,6 +22,6 @@
                 <td>{{income.amount}}</td>
             </tr>
         </tbody>
-        <p *ngIf="!incomes || incomes.length < 1">No Income Records Found</p>
     </table>
+    <p *ngIf="!incomes || incomes.length < 1">No Income Records Found</p>
 </div>

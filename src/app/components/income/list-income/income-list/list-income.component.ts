@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { Income, Source } from 'src/app/models/income.model';
+import { Income } from 'src/app/models/income.model';
 import { IncomesService } from 'src/app/services/incomes/incomes.service';
+import { MatDialog } from '@angular/material/dialog';
+import { AddIncomeComponent } from '../../add-income/add-income.component';
 
 @Component({
   selector: 'app-list-income',
@@ -8,11 +10,14 @@ import { IncomesService } from 'src/app/services/incomes/incomes.service';
   styleUrls: ['./list-income.component.css']
 })
 export class ListIncomeComponent {
-  testSource: Source = { id: '123abc', name: 'Salary' }
   incomes: Income[] = [];
-  constructor(private incomesService: IncomesService) { }
+  constructor(private incomesService: IncomesService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
+    this.refreshIncomes();
+  }
+
+  refreshIncomes() {
     this.incomesService.getAllIncomes()
       .subscribe({
         next: (incomes) => {
@@ -21,6 +26,18 @@ export class ListIncomeComponent {
         error: (response) => {
           console.log(response);
         }
-      })
+      });
+  }
+
+  addIncome(): void {
+    const dialogRef = this.dialog.open(AddIncomeComponent, {
+      width: '250px',
+      data: {}
+    });
+
+    dialogRef.componentInstance.success.subscribe((income) => {
+      dialogRef.close();
+      this.refreshIncomes();
+    });
   }
 }

@@ -1,1 +1,27 @@
-<p>add-income works!</p>
+<div class="container p-3">
+    <h1 class="mb-3">Add Income</h1>
+
+    <div class="row">
+        <div>
+            <form #form="ngForm" (ngSubmit)="addIncome()">
+                <div class="mb-3">
+                    <label for="source" class="form-label">Source</label>
+                    <input type="text" class="form-control" id="source" name="source"
+                        [(ngModel)]="addIncomeRequest.source.name">
+                </div>
+                <div class="mb-3">
+                    <label for="amount" class="form-label">Amount</label>
+                    <input type="number" class="form-control" id="amount" name="amount"
+                        [(ngModel)]="addIncomeRequest.amount">
+                </div>
+                <div class="mb-3">
+                    <label for="date" class="form-label">Date</label>
+                    <input type="date" class="form-control" id="date" name="date"
+                        value="{{ today | date:'yyyy-MM-dd' }}" name="date" [(ngModel)]="addIncomeRequest.date">
+                </div>
+
+                <button type="submit" class="btn btn-primary">Add</button>
+            </form>
+        </div>
+    </div>
+</div>

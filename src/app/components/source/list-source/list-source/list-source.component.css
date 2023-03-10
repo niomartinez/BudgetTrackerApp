@@ -1,0 +1,14 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+.header h1 {
+    margin: 0;
+}
+
+.add-income-btn {
+    margin-left: 10px;
+}

@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { Source } from 'src/app/models/income.model';
 import { IncomesService } from 'src/app/services/incomes/incomes.service';
 import { SourcesService } from 'src/app/services/sources/sources.service';
+import { MatDialog } from '@angular/material/dialog';
+import { AddSourceComponent } from '../../add-source/add-source/add-source.component';
 
 @Component({
   selector: 'app-list-source',
@@ -10,7 +12,7 @@ import { SourcesService } from 'src/app/services/sources/sources.service';
 })
 export class ListSourceComponent {
   sources: Source[] = [];
-  constructor(private sourceService: SourcesService) { }
+  constructor(private sourceService: SourcesService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.sourceService.getAllIncomes()
@@ -22,5 +24,16 @@ export class ListSourceComponent {
           console.log(response);
         }
       })
+  }
+
+  addSource(): void {
+    const dialogRef = this.dialog.open(AddSourceComponent, {
+      width: '250px',
+      data: {}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
   }
 }

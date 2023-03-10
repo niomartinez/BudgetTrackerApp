@@ -15,4 +15,9 @@ export class IncomesService {
   getAllIncomes(): Observable<Income[]> {
     return this.http.get<Income[]>(this.baseApiUrl + '/api/income');
   }
+
+  addIncome(addIncomeRequest: Income): Observable<Income> {
+    addIncomeRequest.id = '00000000-0000-0000-0000-000000000000';
+    return this.http.post<Income>(this.baseApiUrl + '/api/income', addIncomeRequest)
+  }
 }
